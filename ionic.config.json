@@ -1,0 +1,8 @@
+{
+  "name": "ct5006-ionic-lecture",
+  "app_id": "c9d01ba1",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

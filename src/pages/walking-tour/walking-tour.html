@@ -1,0 +1,54 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title> Walking Tour </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+
+  <ion-item color="secondary">
+    <ion-range [(ngModel)]="zoomVal" min="12" max="22" pin="true"
+    
+      #ref (change)="zoomChangedBySlider(ref.value)"
+
+    >
+      <ion-icon range-left small name="search"></ion-icon>
+      <ion-icon range-right name="search"></ion-icon>
+    </ion-range>
+</ion-item>
+
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoomVal"
+
+  (mapReady)="mapReady($event)"
+
+  (zoomChange)="zoomChangedByMap($event)"
+
+>
+    <agm-direction *ngIf="directions" [renderOptions]="directionsOptions" [origin]="directions.origin" [destination]="directions.destination" [travelMode]="directions.travelMode"></agm-direction>
+</agm-map>
+
+  <div text-center>
+    <button (click)="prevStop()"  text-left start ion-button color="secondary" icon-start><ion-icon name="arrow-back"></ion-icon> Previous </button>
+    <button  (click)="centerMap()" text-center ion-button color="secondary" icon-start><ion-icon name="search"></ion-icon> </button>
+    <button (click)="nextStop()" text-right end ion-button color="secondary" icon-end> Next <ion-icon name="arrow-forward"></ion-icon> </button>
+  </div>
+
+<h1 id="test"></h1>
+
+<h2 id="distance-h2"></h2>
+
+<p> In this walk you will uncover the rich history of the Holst family in Cheltenham through buildings and landmarks associated with them. We reccommend that you start the walk at the top of Montpellier, Chemtenham. </p>
+<p> The composer Gustav Holst was born in Cheltenham in 1874. His father Adolph was born in London and later moved to the town as a young man with his parents Gustavus and Honoria von Holst, as well as his four brothers and sisters. 
+  Gustavus von Holst (1799-1870), the first ‘Cheltenham Holst’, was originally from Riga, Latvia. </p>
+
+<p> He began visiting Cheltenham in the 1830s as a music teacher and dealer in harps and pianofortes. He rented homes for the season in a number of areas, such as Tivoli. In the 1850s he brought his family from London and settled permanently in the town. This was due to Gustavus having secured the position of Professor of Music at the newly established Cheltenham Ladies College. </p> 
+
+<p id="info"></p>
+
+
+
+</ion-content>
