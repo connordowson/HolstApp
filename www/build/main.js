@@ -33,7 +33,7 @@ var TourInfoPage = /** @class */ (function () {
     };
     TourInfoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-tour-info',template:/*ion-inline-start:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\tour-info\tour-info.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Holst Life Tour</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. \n    Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, \n    when an unknown printer took a galley of type and scrambled it to make a type specimen book.\n     It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n      It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, \n      and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n  </p>\n\n  <div id ="tourbutton" text center>\n    <button ion-button (click)="push()" color="secondary" text-center>Start Tour</button>\n  </div>  \n    \n</ion-content>\n'/*ion-inline-end:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\tour-info\tour-info.html"*/
+            selector: 'page-tour-info',template:/*ion-inline-start:"F:\GitHub\HolstApp\src\pages\tour-info\tour-info.html"*/'<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Holst Life Tour</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. \n\n    Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, \n\n    when an unknown printer took a galley of type and scrambled it to make a type specimen book.\n\n     It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n\n      It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, \n\n      and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n  </p>\n\n\n\n  <div id ="tourbutton" text center>\n\n    <button ion-button (click)="push()" color="secondary" text-center>Start Tour</button>\n\n  </div>  \n\n    \n\n</ion-content>\n\n'/*ion-inline-end:"F:\GitHub\HolstApp\src\pages\tour-info\tour-info.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
     ], TourInfoPage);
@@ -77,21 +77,15 @@ var WalkingTourPage = /** @class */ (function () {
         this.lat = 51.900872;
         this.lng = -2.079041;
         this.currentStop = 0;
-        this.stopsArray = [];
         this.directions = undefined;
         this.directionsOptions = {
             preserveViewport: true
         };
-        // destination = {
-        //   latitude: 51.892226,
-        //   longitude: -2.086077
-        // }
         this.destinationLat = 51.892226;
         this.destinationLng = -2.086077;
         this.zoomVal = 14;
     }
     WalkingTourPage.prototype.ionViewWillEnter = function () {
-        //var name = Object.keys(tourInfo)[0].;
         var _this = this;
         document.getElementById("test").innerText = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][0].name;
         var options = {
@@ -107,9 +101,6 @@ var WalkingTourPage = /** @class */ (function () {
             }
             if (_this.distanceToDest != null) {
                 document.getElementById("distance-h2").innerText = "You are " + Math.round(_this.distanceToDest) + " meters away!";
-            }
-            if (_this.jsonData != null) {
-                document.getElementById("info").innerText = _this.jsonData.info;
             }
             _this.directions = {
                 origin: { lat: _this.lat, lng: _this.lng },
@@ -131,28 +122,32 @@ var WalkingTourPage = /** @class */ (function () {
         this.zoomVal = parseInt("" + event);
     };
     WalkingTourPage.prototype.nextStop = function () {
-        this.currentStop++;
-        this.destinationLat = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].lat;
-        this.destinationLng = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].lng;
-        this.directions = {
-            origin: { lat: this.lat, lng: this.lng },
-            destination: { lat: this.destinationLat, lng: this.destinationLng },
-            travelMode: 'WALKING'
-        };
-        document.getElementById("test").innerText = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].name;
-        this.updateDistance();
+        if (this.currentStop < (__WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */].length - 1)) {
+            this.currentStop++;
+            this.destinationLat = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].lat;
+            this.destinationLng = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].lng;
+            this.directions = {
+                origin: { lat: this.lat, lng: this.lng },
+                destination: { lat: this.destinationLat, lng: this.destinationLng },
+                travelMode: 'WALKING'
+            };
+            document.getElementById("test").innerText = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].name;
+            this.updateDistance();
+        }
     };
     WalkingTourPage.prototype.prevStop = function () {
-        this.currentStop--;
-        this.destinationLat = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].lat;
-        this.destinationLng = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].lng;
-        this.directions = {
-            origin: { lat: this.lat, lng: this.lng },
-            destination: { lat: this.destinationLat, lng: this.destinationLng },
-            travelMode: 'WALKING'
-        };
-        document.getElementById("test").innerText = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].name;
-        this.updateDistance();
+        if (this.currentStop != 0) {
+            this.currentStop--;
+            this.destinationLat = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].lat;
+            this.destinationLng = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].lng;
+            this.directions = {
+                origin: { lat: this.lat, lng: this.lng },
+                destination: { lat: this.destinationLat, lng: this.destinationLng },
+                travelMode: 'WALKING'
+            };
+            document.getElementById("test").innerText = __WEBPACK_IMPORTED_MODULE_2__tourdata__["a" /* tourInfo */][this.currentStop].name;
+            this.updateDistance();
+        }
     };
     WalkingTourPage.prototype.updateDistance = function () {
         this.distanceToDest = this._haversineService.getDistanceInMeters({ latitude: this.lat, longitude: this.lng }, { latitude: this.destinationLat, longitude: this.destinationLng });
@@ -160,13 +155,12 @@ var WalkingTourPage = /** @class */ (function () {
     };
     WalkingTourPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-walking-tour',template:/*ion-inline-start:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\walking-tour\walking-tour.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title> Walking Tour </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  \n\n  <ion-item color="secondary">\n    <ion-range [(ngModel)]="zoomVal" min="12" max="22" pin="true"\n    \n      #ref (change)="zoomChangedBySlider(ref.value)"\n\n    >\n      <ion-icon range-left small name="search"></ion-icon>\n      <ion-icon range-right name="search"></ion-icon>\n    </ion-range>\n</ion-item>\n\n<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoomVal"\n\n  (mapReady)="mapReady($event)"\n\n  (zoomChange)="zoomChangedByMap($event)"\n\n>\n    <agm-direction *ngIf="directions" [renderOptions]="directionsOptions" [origin]="directions.origin" [destination]="directions.destination" [travelMode]="directions.travelMode"></agm-direction>\n</agm-map>\n\n  <div text-center>\n    <button (click)="prevStop()"  text-left start ion-button color="secondary" icon-start><ion-icon name="arrow-back"></ion-icon> Previous </button>\n    <button  (click)="centerMap()" text-center ion-button color="secondary" icon-start><ion-icon name="search"></ion-icon> </button>\n    <button (click)="nextStop()" text-right end ion-button color="secondary" icon-end> Next <ion-icon name="arrow-forward"></ion-icon> </button>\n  </div>\n\n<h1 id="test"></h1>\n\n<h2 id="distance-h2"></h2>\n\n<p> In this walk you will uncover the rich history of the Holst family in Cheltenham through buildings and landmarks associated with them. We reccommend that you start the walk at the top of Montpellier, Chemtenham. </p>\n<p> The composer Gustav Holst was born in Cheltenham in 1874. His father Adolph was born in London and later moved to the town as a young man with his parents Gustavus and Honoria von Holst, as well as his four brothers and sisters. \n  Gustavus von Holst (1799-1870), the first ‘Cheltenham Holst’, was originally from Riga, Latvia. </p>\n\n<p> He began visiting Cheltenham in the 1830s as a music teacher and dealer in harps and pianofortes. He rented homes for the season in a number of areas, such as Tivoli. In the 1850s he brought his family from London and settled permanently in the town. This was due to Gustavus having secured the position of Professor of Music at the newly established Cheltenham Ladies College. </p> \n\n<p id="info"></p>\n\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\walking-tour\walking-tour.html"*/,
+            selector: 'page-walking-tour',template:/*ion-inline-start:"F:\GitHub\HolstApp\src\pages\walking-tour\walking-tour.html"*/'<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title> Walking Tour </ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  \n\n\n\n  <ion-item color="secondary">\n\n    <ion-range [(ngModel)]="zoomVal" min="12" max="22" pin="true"\n\n    \n\n      #ref (change)="zoomChangedBySlider(ref.value)"\n\n\n\n    >\n\n      <ion-icon range-left small name="search"></ion-icon>\n\n      <ion-icon range-right name="search"></ion-icon>\n\n    </ion-range>\n\n</ion-item>\n\n\n\n<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoomVal"\n\n\n\n  (mapReady)="mapReady($event)"\n\n\n\n  (zoomChange)="zoomChangedByMap($event)"\n\n\n\n>\n\n    <agm-direction *ngIf="directions" [renderOptions]="directionsOptions" [origin]="directions.origin" [destination]="directions.destination" [travelMode]="directions.travelMode"></agm-direction>\n\n</agm-map>\n\n\n\n  <div text-center>\n\n    <button (click)="prevStop()"  text-left start ion-button color="secondary" icon-start><ion-icon name="arrow-back"></ion-icon> Previous </button>\n\n    <button  (click)="centerMap()" text-center ion-button color="secondary" icon-start><ion-icon name="search"></ion-icon> </button>\n\n    <button (click)="nextStop()" text-right end ion-button color="secondary" icon-end> Next <ion-icon name="arrow-forward"></ion-icon> </button>\n\n  </div>\n\n\n\n<h1 id="test"></h1>\n\n\n\n<h2 id="distance-h2"></h2>\n\n\n\n<p> In this walk you will uncover the rich history of the Holst family in Cheltenham through buildings and landmarks associated with them. We reccommend that you start the walk at the top of Montpellier, Chemtenham. </p>\n\n<p> The composer Gustav Holst was born in Cheltenham in 1874. His father Adolph was born in London and later moved to the town as a young man with his parents Gustavus and Honoria von Holst, as well as his four brothers and sisters. \n\n  Gustavus von Holst (1799-1870), the first ‘Cheltenham Holst’, was originally from Riga, Latvia. </p>\n\n\n\n<p> He began visiting Cheltenham in the 1830s as a music teacher and dealer in harps and pianofortes. He rented homes for the season in a number of areas, such as Tivoli. In the 1850s he brought his family from London and settled permanently in the town. This was due to Gustavus having secured the position of Professor of Music at the newly established Cheltenham Ladies College. </p> \n\n\n\n<p id="info"></p>\n\n\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"F:\GitHub\HolstApp\src\pages\walking-tour\walking-tour.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_4_ng2_haversine__["HaversineService"]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4_ng2_haversine__["HaversineService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_ng2_haversine__["HaversineService"]) === "function" && _c || Object])
     ], WalkingTourPage);
     return WalkingTourPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=walking-tour.js.map
@@ -248,7 +242,7 @@ var TabsPage = /** @class */ (function () {
         this.tab3Root = __WEBPACK_IMPORTED_MODULE_2__contact_contact__["a" /* ContactPage */];
     }
     TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\tabs\tabs.html"*/'<ion-tabs>\n  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>\n  <ion-tab [root]="tab2Root" tabTitle="Walking Tour" tabIcon="pin"></ion-tab>\n  <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\tabs\tabs.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"F:\GitHub\HolstApp\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="Walking Tour" tabIcon="pin"></ion-tab>\n\n  <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>\n\n</ion-tabs>\n\n'/*ion-inline-end:"F:\GitHub\HolstApp\src\pages\tabs\tabs.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], TabsPage);
@@ -280,7 +274,7 @@ var HomePage = /** @class */ (function () {
     }
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title> Gustav Holst </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <h2> Welcome! </h2>\n<!-- \n  <ion-item>\n      <ion-label floating> Campus </ion-label>\n      <ion-input [(ngModel)]="campusName" type="text" color="primary"></ion-input>\n  </ion-item>\n\n  <button ion-button icon-left color="danger"\n  \n    (click)="openCampusMap($campusName)"\n\n  >\n      <ion-icon name="logo-xbox"></ion-icon>\n      Show Map\n  </button> -->\n\n  <!-- <ion-item color="secondary">\n      <ion-range [(ngModel)]="zoomVal" min="14" max="22" pin="true"\n      \n        #ref (change)="zoomChangedBySlider(ref.value)"\n\n      >\n        <ion-icon range-left small name="search"></ion-icon>\n        <ion-icon range-right name="search"></ion-icon>\n      </ion-range>\n  </ion-item>\n\n  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoomVal"\n  \n    (zoomChange)="zoomChangedByMap($event)"\n  \n  >\n      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>\n  </agm-map>\n   -->\n</ion-content>\n'/*ion-inline-end:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"F:\GitHub\HolstApp\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title> Gustav Holst </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <h2> Welcome! </h2>\n\n<!-- \n\n  <ion-item>\n\n      <ion-label floating> Campus </ion-label>\n\n      <ion-input [(ngModel)]="campusName" type="text" color="primary"></ion-input>\n\n  </ion-item>\n\n\n\n  <button ion-button icon-left color="danger"\n\n  \n\n    (click)="openCampusMap($campusName)"\n\n\n\n  >\n\n      <ion-icon name="logo-xbox"></ion-icon>\n\n      Show Map\n\n  </button> -->\n\n\n\n  <!-- <ion-item color="secondary">\n\n      <ion-range [(ngModel)]="zoomVal" min="14" max="22" pin="true"\n\n      \n\n        #ref (change)="zoomChangedBySlider(ref.value)"\n\n\n\n      >\n\n        <ion-icon range-left small name="search"></ion-icon>\n\n        <ion-icon range-right name="search"></ion-icon>\n\n      </ion-range>\n\n  </ion-item>\n\n\n\n  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoomVal"\n\n  \n\n    (zoomChange)="zoomChangedByMap($event)"\n\n  \n\n  >\n\n      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>\n\n  </agm-map>\n\n   -->\n\n</ion-content>\n\n'/*ion-inline-end:"F:\GitHub\HolstApp\src\pages\home\home.html"*/
         })
     ], HomePage);
     return HomePage;
@@ -314,7 +308,7 @@ var ContactPage = /** @class */ (function () {
     }
     ContactPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-contact',template:/*ion-inline-start:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\contact\contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n   <ion-list>\n    <ion-item>\n      <ion-note item-start>\n        Left Note\n      </ion-note>\n      My Item\n      <ion-note item-end>\n        Right Note\n      </ion-note>\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\contact\contact.html"*/
+            selector: 'page-contact',template:/*ion-inline-start:"F:\GitHub\HolstApp\src\pages\contact\contact.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Contact\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n   <ion-list>\n\n    <ion-item>\n\n      <ion-note item-start>\n\n        Left Note\n\n      </ion-note>\n\n      My Item\n\n      <ion-note item-end>\n\n        Right Note\n\n      </ion-note>\n\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"F:\GitHub\HolstApp\src\pages\contact\contact.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
     ], ContactPage);
@@ -442,8 +436,7 @@ var AppModule = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return tourInfo; });
-var tourInfo;
-tourInfo = [
+var tourInfo = [
     {
         name: "Rotunda Place",
         lat: 51.892226,
@@ -494,7 +487,7 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"F:\GitHub\HolstApp\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"F:\GitHub\HolstApp\src\app\app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
@@ -529,7 +522,7 @@ var AboutPage = /** @class */ (function () {
     }
     AboutPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-about',template:/*ion-inline-start:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\about\about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      About\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\finla\OneDrive\Documents\uni\Year 2\app dev\CT5006sem2build\3rdMaybuild\src\pages\about\about.html"*/
+            selector: 'page-about',template:/*ion-inline-start:"F:\GitHub\HolstApp\src\pages\about\about.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      About\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"F:\GitHub\HolstApp\src\pages\about\about.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
     ], AboutPage);

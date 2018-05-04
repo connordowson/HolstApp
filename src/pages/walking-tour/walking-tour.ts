@@ -18,19 +18,12 @@ export class WalkingTourPage {
 
   currentStop: number = 0;
 
-  stopsArray = []
-
-
   directions = undefined;
 
   directionsOptions  = {
     preserveViewport: true
   };
 
-  // destination = {
-  //   latitude: 51.892226,
-  //   longitude: -2.086077
-  // }
 
   destinationLat: number = 51.892226;
   destinationLng: number = -2.086077;
@@ -38,10 +31,6 @@ export class WalkingTourPage {
   distanceToDest: number;
 
   zoomVal: number = 14;
-
-  jsonData;
-
-
 
   protected map: any;
 
@@ -53,8 +42,6 @@ export class WalkingTourPage {
 
   ionViewWillEnter() {
   
-      //var name = Object.keys(tourInfo)[0].;
-
       document.getElementById("test").innerText = tourInfo[0].name;
       var options = {
   
@@ -85,11 +72,6 @@ export class WalkingTourPage {
 
         }
 
-        if(this.jsonData != null){
-
-          document.getElementById("info").innerText = this.jsonData.info; 
-
-        }
 
         this.directions = {
           origin: {lat: this.lat, lng: this.lng},
@@ -124,43 +106,48 @@ export class WalkingTourPage {
     }
 
     nextStop(){
+
+      if(this.currentStop < (tourInfo.length - 1)){
       
-      this.currentStop++;
+        this.currentStop++;
 
-      this.destinationLat = tourInfo[this.currentStop].lat;
-      this.destinationLng = tourInfo[this.currentStop].lng;
+        this.destinationLat = tourInfo[this.currentStop].lat;
+        this.destinationLng = tourInfo[this.currentStop].lng;
 
-      this.directions = {
-        origin: {lat: this.lat, lng: this.lng},
-        destination: {lat: this.destinationLat, lng: this.destinationLng},
-        travelMode: 'WALKING'
+        this.directions = {
+          origin: {lat: this.lat, lng: this.lng},
+          destination: {lat: this.destinationLat, lng: this.destinationLng},
+          travelMode: 'WALKING'
+        }
+
+        document.getElementById("test").innerText = tourInfo[this.currentStop].name;
+
+        this.updateDistance();
+
       }
-
-      document.getElementById("test").innerText = tourInfo[this.currentStop].name;
-
-      this.updateDistance();
-
-
-
 
     }
 
     prevStop(){
 
-      this.currentStop--;
+      if(this.currentStop != 0){
 
-      this.destinationLat = tourInfo[this.currentStop].lat;
-      this.destinationLng = tourInfo[this.currentStop].lng;
+        this.currentStop--;
 
-      this.directions = {
-        origin: {lat: this.lat, lng: this.lng},
-        destination: {lat: this.destinationLat, lng: this.destinationLng},
-        travelMode: 'WALKING'
+        this.destinationLat = tourInfo[this.currentStop].lat;
+        this.destinationLng = tourInfo[this.currentStop].lng;
+
+        this.directions = {
+          origin: {lat: this.lat, lng: this.lng},
+          destination: {lat: this.destinationLat, lng: this.destinationLng},
+          travelMode: 'WALKING'
+        }
+
+        document.getElementById("test").innerText = tourInfo[this.currentStop].name;
+
+        this.updateDistance();
+
       }
-
-      document.getElementById("test").innerText = tourInfo[this.currentStop].name;
-
-      this.updateDistance();
 
     }
 
